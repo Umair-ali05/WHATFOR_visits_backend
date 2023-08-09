@@ -60,7 +60,7 @@ export default {
   chatWithGPT: async (message) => {
     try {
       const configuration = new Configuration({
-        apiKey: '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',
+        apiKey: process.env.CHAT_GPT_KEY,
       });
 
       const openai = new OpenAIApi(configuration);
