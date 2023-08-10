@@ -16,17 +16,17 @@ export default {
       let { text } = body;
       const getBlogData = await adminService.viewPostByName({ _id: blogId });
 
-      text = `${text} this statemnt about ${getBlogData.post.placeName} of ${getBlogData.post.placeCity} is true or false, if false give me the reason`;
+      // text = `${text} this statemnt about ${getBlogData.post.placeName} of ${getBlogData.post.placeCity} is true or false, if false give me the reason`;
 
-      let chatGPTResponse = await utils.chatWithGPT(text);
+      // let chatGPTResponse = await utils.chatWithGPT(text);
 
-      if (!chatGPTResponse.includes(' false')) {
-        chatGPTResponse = '';
-      }
+      // if (!chatGPTResponse.includes(' false')) {
+      //   chatGPTResponse = '';
+      // }
 
       const commentData = {
         text,
-        chatGPTResponse,
+        // chatGPTResponse,
         userName: user.name,
         place: blogId,
         date: Date.now(),
