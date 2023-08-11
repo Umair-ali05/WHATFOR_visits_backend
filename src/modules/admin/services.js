@@ -167,6 +167,7 @@ export default {
   viewPostByName: async (query) => {
     try {
       const viewPost = await adminRepository.getPlace(query);
+
       if (!viewPost) {
         return {
           success: false,

@@ -62,7 +62,6 @@ export default {
   },
   viewPostByName: async (req, res) => {
     try {
-      console.log(req.params);
       const { placeType, placeName } = req.params;
 
       const response = await AdminService.viewPostByName({

@@ -13,7 +13,6 @@ class PackageRepo extends Base {
   }
 
   async getPlacesWithAggregations(query) {
-    console.log(query);
     return this.getRecordsWithAggregation(query);
   }
 
@@ -23,7 +22,7 @@ class PackageRepo extends Base {
     } else {
       query = {
         placeType: query.placeType,
-        placeName: { $regex: query.placeName },
+        placeName: { $regex: query.placeName, $options: 'i' },
       };
     }
     return this.getRecord(query);

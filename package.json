@@ -1,7 +1,7 @@
 {
   "type": "module",
   "scripts": {
-    "start": "node ./src/index.js",
+    "start": "nodemon ./src/index.js",
     "clint": "cd ../frontend && npm start",
     "dev": "concurrently \"nodemon ./src/index.js\" \"npm run clint\""
   },
