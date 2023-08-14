@@ -99,6 +99,9 @@ export default {
         placeAddress,
         placeCity,
         placeCountry,
+        placePhone,
+        placeWebsite,
+        placeTime,
         recommendation,
       } = body;
       let placeImageUrl;
@@ -106,6 +109,18 @@ export default {
       if (user.role !== 'Admin') {
         return { success: false, message: constants.YOU_ARE_NOT_ADMIN };
       }
+      const urlRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/;
+      const checkWebsite = utils.isValidURL(urlRegex, placeWebsite);
+      if (!checkWebsite) {
+        return { success: false, message: constants.INVALID_WEBSITE_URL };
+      }
+
+      const phoneNumberRegex = /^[0-9()+\- ]+$/;
+      const checkPhoneNumber = utils.isValidURL(phoneNumberRegex, placePhone);
+      if (!checkPhoneNumber) {
+        return { success: false, message: constants.INVALID_PHONE_NUMBER };
+      }
+
       imageName = `${Date.now()}-${image.originalname}`;
       placeImageUrl = await utils.uploadFile(image.buffer, imageName);
       const postData = {
@@ -116,6 +131,9 @@ export default {
         placeDescription,
         recommendation,
         placeAddress,
+        placePhone,
+        placeWebsite,
+        placeTime,
         placeImageUrl,
         imageName,
       };
@@ -245,11 +263,36 @@ export default {
       };
     }
   },
-  updatePost: async (user, id, body) => {
+  updatePost: async (user, id, body, image) => {
     try {
       if (user.role !== 'Admin') {
         return { success: false, message: constants.YOU_ARE_NOT_ADMIN };
       }
+
+      let placeImageUrl;
+      let imageName;
+      if (image) {
+        imageName = `${Date.now()}-${image.originalname}`;
+        placeImageUrl = await utils.uploadFile(image.buffer, imageName);
+      }
+
+      body['placeImageUrl'] = placeImageUrl;
+
+      const urlRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/;
+      const checkWebsite = utils.isValidURL(urlRegex, body.placeWebsite);
+      if (!checkWebsite) {
+        return { success: false, message: constants.INVALID_WEBSITE_URL };
+      }
+
+      const phoneNumberRegex = /^[0-9()+\- ]+$/;
+      const checkPhoneNumber = utils.isValidURL(
+        phoneNumberRegex,
+        body.placePhone
+      );
+      if (!checkPhoneNumber) {
+        return { success: false, message: constants.INVALID_PHONE_NUMBER };
+      }
+
       const checkRecord = await adminRepository.updatePlace({ _id: id }, body);
       if (!checkRecord) {
         return {

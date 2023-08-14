@@ -37,7 +37,7 @@ export default {
       const { user } = req.user;
       const { body } = req;
       const { file } = req;
-      console.log(file, body);
+
       const response = await AdminService.addPost(user, file, body);
 
       return !response.success
@@ -93,8 +93,9 @@ export default {
       const { user } = req.user;
       const { id } = req.params;
       const { body } = req;
+      const { file } = req;
 
-      const response = await AdminService.updatePost(user, id, body);
+      const response = await AdminService.updatePost(user, id, body, file);
       return !response.success
         ? res.status(400).json({ err: response })
         : res.status(200).json({ post: response });

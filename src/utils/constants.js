@@ -22,5 +22,7 @@ const constants = Object.freeze({
   PASSWORD_HAS_WHTIE_SPACES: 'password has whitespace',
   SELECT_ROLE: 'please select Role',
   USER_UPDATED_SUCCESSFULLY: 'User updated successfully',
+  INVALID_WEBSITE_URL: 'Invalid WebSite URL',
+  INVALID_PHONE_NUMBER: 'Invalid phone number',
 });
 export default constants;

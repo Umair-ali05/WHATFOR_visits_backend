@@ -15,6 +15,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default {
+  isValidURL: (regexString, url) => {
+    return regexString.test(url);
+  },
+  isValidPhoneNumber: (regexString, phoneNumber) => {
+    return regexString.test(phoneNumber);
+  },
   uploadFile: (image, imageName) => {
     try {
       let imageUrl = process.env.VIEW_IMAGE_URL;

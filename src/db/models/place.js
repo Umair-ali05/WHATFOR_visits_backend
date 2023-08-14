@@ -28,6 +28,15 @@ const placeSchema = new mongoose.Schema({
   placeAddress: {
     type: String,
   },
+  placePhone: {
+    type: String,
+  },
+  placeWebsite: {
+    type: String,
+  },
+  placeTime: {
+    type: String,
+  },
   recommendation: {
     type: String,
     enum: ['Important', 'General'],

@@ -9,6 +9,9 @@ const replyCommentSchema = new mongoose.Schema({
     trim: true,
     required: true,
   },
+  replyImageUrl: {
+    type: String,
+  },
   date: {
     type: Date,
     default: Date.now,

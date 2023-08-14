@@ -14,6 +14,7 @@ export default {
   addComment: async (user, blogId, body) => {
     try {
       let { text } = body;
+
       const getBlogData = await adminService.viewPostByName({ _id: blogId });
 
       // text = `${text} this statemnt about ${getBlogData.post.placeName} of ${getBlogData.post.placeCity} is true or false, if false give me the reason`;
@@ -27,6 +28,7 @@ export default {
       const commentData = {
         text,
         // chatGPTResponse,
+
         userName: user.name,
         place: blogId,
         date: Date.now(),
@@ -44,11 +46,19 @@ export default {
       };
     }
   },
-  replyComment: async (user, body, commentId) => {
+  replyComment: async (user, body, commentId, image) => {
     try {
       const { text } = body;
+      let replyImageUrl;
+      let imageName;
+      if (image) {
+        imageName = `${Date.now()}-${image.originalname}`;
+        replyImageUrl = await utils.uploadFile(image.buffer, imageName);
+      }
+
       const commentData = {
         text,
+        replyImageUrl,
         userName: user.name,
         comment: commentId,
         date: Date.now(),

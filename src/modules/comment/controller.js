@@ -25,8 +25,14 @@ export default {
       const { user } = req.user;
       const { body } = req;
       const { commentId } = req.params;
+      const { file } = req;
 
-      const response = await commentService.replyComment(user, body, commentId);
+      const response = await commentService.replyComment(
+        user,
+        body,
+        commentId,
+        file
+      );
       return !response.success
         ? res.status(400).json({ err: response })
         : res.status(200).json({ post: response });
