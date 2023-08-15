@@ -13,21 +13,24 @@ config();
 export default {
   addComment: async (user, blogId, body) => {
     try {
-      let { text } = body;
+      const { text } = body;
 
       const getBlogData = await adminService.viewPostByName({ _id: blogId });
 
-      // text = `${text} this statemnt about ${getBlogData.post.placeName} of ${getBlogData.post.placeCity} is true or false, if false give me the reason`;
+      const ntext = `${text}, this statemnt about ${getBlogData.post.placeName} of ${getBlogData.post.placeCity} is true or false, if false give me the reason`;
 
-      // let chatGPTResponse = await utils.chatWithGPT(text);
+      let chatGPTResponse = await utils.chatWithGPT(ntext);
 
-      // if (!chatGPTResponse.includes(' false')) {
-      //   chatGPTResponse = '';
-      // }
+      if (
+        chatGPTResponse === 'false' ||
+        !chatGPTResponse.includes('why', 'false', 'but')
+      ) {
+        chatGPTResponse = '';
+      }
 
       const commentData = {
         text,
-        // chatGPTResponse,
+        chatGPTResponse,
 
         userName: user.name,
         place: blogId,

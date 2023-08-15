@@ -16,6 +16,9 @@ const replyCommentSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  chatGPTResponse: {
+    type: String,
+  },
   // each comment can only relates to one blog, so it's not in array
   userName: {
     type: String,

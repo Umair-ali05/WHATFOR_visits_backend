@@ -81,6 +81,8 @@ export default {
         })
       );
 
+      console.log(response.data.choices[0].text.trim());
+
       return response.data.choices[0].text.trim();
     } catch (error) {
       console.error('Error occurred:', error);
