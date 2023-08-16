@@ -347,6 +347,7 @@ export default {
         user: user._id,
         place: id,
       });
+
       if (!checkAlreadyRated) {
         const done = await ratingRepository.createRating({
           user: user._id,

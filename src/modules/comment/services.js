@@ -17,14 +17,16 @@ export default {
 
       const getBlogData = await adminService.viewPostByName({ _id: blogId });
 
-      const ntext = `${text}, this statemnt about ${getBlogData.post.placeName} of ${getBlogData.post.placeCity} is true or false, if false give me the reason`;
+      const ntext = `Can you evaluate the accuracy of the following claim in yes and no and with reason? ${text}about  ${getBlogData.post.placeName} of ${getBlogData.post.placeCity}.`;
 
       let chatGPTResponse = await utils.chatWithGPT(ntext);
 
-      if (
-        chatGPTResponse === 'false' ||
-        !chatGPTResponse.includes('why', 'false', 'but')
-      ) {
+      const keywords = ['There is no', 'No', 'why', 'false', 'but'];
+      const containsKeywords = keywords.some((keyword) =>
+        chatGPTResponse.includes(keyword)
+      );
+
+      if (!containsKeywords) {
         chatGPTResponse = '';
       }
 
