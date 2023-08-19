@@ -19,28 +19,28 @@ export default {
 
       const nntext = `About ${getBlogData.post.placeName} located in ${getBlogData.post.placeCountry}, ${getBlogData.post.placeCity}, ${text}, this statement, is true or false ,  if false what will be the reason `;
       let chatGPTResponse;
-      if (getBlogData.post.placeType === 'MUSEUM') {
-        const COOKIE = process.env.COOKIE;
-        let myBard = new Bard(`__Secure-1PSID=${COOKIE}`);
+      // if (getBlogData.post.placeType === 'MUSEUM') {
+      //   const COOKIE = process.env.COOKIE;
+      //   let myBard = new Bard(`__Secure-1PSID=${COOKIE}`);
 
-        console.log(await myBard.ask('Hello world!'));
-        console.log(
-          await myBard
-            .ask('Hello, world!')
-            .catch((err) => console.log(err.message))
-        );
-      } else {
-        chatGPTResponse = await utils.chatWithGPT(nntext);
+      //   console.log(await myBard.ask('Hello world!'));
+      //   console.log(
+      //     await myBard
+      //       .ask('Hello, world!')
+      //       .catch((err) => console.log(err.message))
+      //   );
+      // } else {
+      chatGPTResponse = await utils.chatWithGPT(nntext);
 
-        const keywords = ['There is no', 'No', 'why', 'False', 'false', 'but'];
-        const containsKeywords = keywords.some((keyword) =>
-          chatGPTResponse.includes(keyword)
-        );
+      const keywords = ['There is no', 'No', 'why', 'False', 'false', 'but'];
+      const containsKeywords = keywords.some((keyword) =>
+        chatGPTResponse.includes(keyword)
+      );
 
-        if (!containsKeywords) {
-          chatGPTResponse = '';
-        }
+      if (!containsKeywords) {
+        chatGPTResponse = '';
       }
+      // }
       const commentData = {
         text,
         chatGPTResponse,
