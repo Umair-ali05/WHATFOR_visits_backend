@@ -85,7 +85,7 @@ export default {
 
       return response.data.choices[0].text.trim();
     } catch (error) {
-      console.error('Error occurred:', error);
+      console.error('Error occurred:', error.message);
       ll;
       return 'Oops, something went wrong!';
     }
