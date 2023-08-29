@@ -7,6 +7,7 @@ import commentRepository from '../../repo/comment.js';
 import replyRepository from '../../repo/reply-comment.js';
 import adminService from '../admin/services.js';
 import utils from '../../utils/utils.js';
+import { log } from 'console';
 
 config();
 
@@ -31,7 +32,7 @@ export default {
       //   );
       // } else {
       chatGPTResponse = await utils.chatWithGPT(nntext);
-
+console.log(chatGPTResponse);
       const keywords = ['There is no', 'No', 'why', 'False', 'false', 'but'];
       const containsKeywords = keywords.some((keyword) =>
         chatGPTResponse.includes(keyword)
