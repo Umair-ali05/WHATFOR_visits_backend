@@ -18,7 +18,7 @@ export default {
 
       const getBlogData = await adminService.viewPostByName({ _id: blogId });
 
-      const nntext = `About ${getBlogData.post.placeName} located in ${getBlogData.post.placeCountry}, ${getBlogData.post.placeCity}, ${text}, this statement, is true or false ,  if false what will be the reason `;
+      const nntext = `${getBlogData.post.placeName} ${getBlogData.post.placeType} located in ${getBlogData.post.placeCountry}, ${getBlogData.post.placeCity}, ${text}, this statement, is true or false ,  if false what will be the reason `;
       let chatGPTResponse;
       // if (getBlogData.post.placeType === 'MUSEUM') {
       //   const COOKIE = process.env.COOKIE;
